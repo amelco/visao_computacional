@@ -7,7 +7,7 @@ img = cv.imread("image.jpg", 0);
 brighter = np.zeros(img.shape)
 brighter = brighter.astype('uint8')
 for (y,x), value in np.ndenumerate(img):
-    brighter[y,x] = min(255, 60 + value);
+    brighter[y,x] = min(255, 100 + value);
 
 # adiciona linhas
 stripes = np.copy(brighter)
