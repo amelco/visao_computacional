@@ -15,17 +15,6 @@ std::string face_file, eye_file;
 
 int main( int argc, const char** argv )
 {
-  //cv::CommandLineParser parser(argc, argv,
-  //                         "{help h||}"
-  //                         "{face_cascade|data/haarcascades/haarcascade_frontalface_alt.xml|Path to face cascade.}"
-  //                         "{eyes_cascade|data/haarcascades/haarcascade_eye_tree_eyeglasses.xml|Path to eyes cascade.}"
-  //                         "{camera|0|Camera device number.}");
-  //parser.about( "\nThis program demonstrates using the cv::CascadeClassifier class to detect objects (Face + eyes) in a video stream.\n"
-  //              "You can use Haar or LBP features.\n\n" );
-  //parser.printMessage();
-  //cv::String face_cascade_name = cv::samples::findFile( parser.get<cv::String>("face_cascade") );
-  //cv::String eyes_cascade_name = cv::samples::findFile( parser.get<cv::String>("eyes_cascade") );
-
   std::string face_cascade_name = "/home/andre/gits/opencv/data/haarcascades/haarcascade_frontalface_alt.xml";
   std::string eyes_cascade_name = "/home/andre/gits/opencv/data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
   
@@ -80,30 +69,32 @@ int main( int argc, const char** argv )
   }
   return 0;
 }
+
 void detectAndDisplay( cv::Mat frame )
 {
   cv::Mat frame_gray;
+  cv::Mat rosto;
+  cv::Mat olho;
   cv::cvtColor( frame, frame_gray, cv::COLOR_BGR2GRAY );
   cv::equalizeHist( frame_gray, frame_gray );
   //-- Detect faces
   std::vector<cv::Rect> faces;
+  std::vector<cv::Rect> eyes;
   face_cascade.detectMultiScale( frame_gray, faces );
-  for ( size_t i = 0; i < faces.size(); i++ )
+  if (faces.size() > 0)
   {
-    cv::Point center( faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2 );
-    ellipse( frame, center, cv::Size( faces[i].width/2, faces[i].height/2 ), 0, 0, 360, cv::Scalar( 255, 0, 255 ), 4 );
-    cv::Mat faceROI = frame_gray( faces[i] );
-    //-- In each face, detect eyes
-    std::vector<cv::Rect> eyes;
+    rosto = frame(faces[0]);
+    cv::rectangle(frame, faces[0], cv::Scalar( 255, 0, 255 ));
+    cv::Mat faceROI = frame_gray( faces[0] );
     eyes_cascade.detectMultiScale( faceROI, eyes );
-    for ( size_t j = 0; j < eyes.size(); j++ )
+    if (eyes.size() > 0)
     {
-        cv::Point eye_center( faces[i].x + eyes[j].x + eyes[j].width/2, faces[i].y + eyes[j].y + eyes[j].height/2 );
-        int radius = cvRound( (eyes[j].width + eyes[j].height)*0.25 );
-        circle( frame, eye_center, radius, cv::Scalar( 255, 0, 0 ), 4 );
+      olho = faceROI(eyes[0]);
     }
   }
-  //-- Show what you got
-  cv::imshow( "Capture - Face detection", frame );
-  cv::imshow( "Capture - Face detection gray", frame_gray );
+  std::cout << "# olhos: " << eyes.size() << std::endl;
+
+  cv::imshow("Capture - Face detection", frame);
+  //if (faces.size() > 0) cv::imshow("Capture - Rosto", rosto);
+  if (eyes.size() > 0) cv::imshow("Capture - Olho", olho);
 }
