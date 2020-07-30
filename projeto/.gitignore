@@ -1,6 +1,6 @@
-*.png
-*.jpg
-*.gif
+**/*.png
+**/*.jpg
+**/*.gif
 *.gz
 *.xz
 *.dsc
