@@ -17,8 +17,8 @@ std::vector<cv::Rect> eyes;
 
 int main(int argc, const char** argv)
 {
-  std::string face_cascade_name = "/home/andre/gits/opencv/data/haarcascades/haarcascade_frontalface_alt.xml";
-  std::string eyes_cascade_name = "/home/andre/gits/opencv/data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
+  std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
+  std::string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
   
   // Carregando os cascades
   if (!face_cascade.load(face_cascade_name))
