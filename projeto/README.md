@@ -27,7 +27,9 @@ estão sendo salvos.
 - [x] Identificação da face (visão)
 - [x] Identificação dos olhos (visão)
 - [x] Extração da imagem dos olhos para treinamento (visão)
-- [x] Pré-tratamento da imagem dos olhos antes do treinamento (visão)
+- [ ] Pré-tratamento da imagem dos olhos antes do treinamento
+  - [x] Aplicação de filtro *threshold* sobre a intensidade média da imagem (visão)
+  - [ ] Normalização do tamanho (visão / aprendizado )
 - [ ] Treinamento do modelo de predição (aprendizado)
 - [ ] Execução do programa com o modelo calibrado (aprendizado)
 - [ ] Predição satisfatória da direção do olho (aprendizado)
