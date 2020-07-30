@@ -16,9 +16,13 @@ na direção em que o olho aponta.
 
 Num primeiro momento, as direções serão: cima, baixo, esquerda e direita.  
 Quando uma maior experiência for desenvolvida na calibração do modelo,
-as outras 4 direções referentes às diagonais serào adicionadas.
+as outras 4 direções referentes às diagonais serão adicionadas.
 
-## TODO list
+O **estado atual** do programa está marcado na *TODO list* abaixo. Por enquanto
+os arquivos de imagem que servirão de entrada para a calibração do modelo
+estão sendo salvos.
+
+## *TODO list*
 
 - [x] Identificação da face (visão)
 - [x] Identificação dos olhos (visão)
