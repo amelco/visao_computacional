@@ -2,10 +2,12 @@
 #include "opencv2/highgui.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/videoio.hpp"
+#include <iterator>
 #include <opencv4/opencv2/core.hpp>
 
 #include <bits/types/time_t.h>
 #include <iostream>
+#include <opencv4/opencv2/core/types.hpp>
 #include <string>
 #include <time.h>
 
@@ -19,6 +21,7 @@ int main(int argc, const char** argv)
 {
   std::string face_cascade_name = "haarcascade_frontalface_alt.xml";
   std::string eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
+  std::string output_dir = "data";
   
   // Carregando os cascades
   if (!face_cascade.load(face_cascade_name))
@@ -65,32 +68,35 @@ int main(int argc, const char** argv)
     //detectAndDisplay(frame);
 
     cv::Mat olhos[2];
-    cv::Mat bw_olhos[2];
     detectAndReturnEyes(frame, olhos);
 
     // aplica filtro nas matrizes dos olhos
     if (eyes.size() > 0)
     {
-      olhos[0].copyTo(bw_olhos[0]);
-      olhos[1].copyTo(bw_olhos[1]);
+      // por enquanto, considera apenas 1 olho
+      
+      // normaliza o tamanho (60x60)
+      cv::Mat rs_olho(cv::Size(60,60), olhos[0].type());
+      cv::resize(olhos[0],rs_olho, rs_olho.size());
 
       // calcula a media de intensidade
-      cv::Scalar avg = cv::mean(bw_olhos[0]);
+      cv::Scalar avg = cv::mean(rs_olho);
+
+      // aplica o threshold
+      cv::Mat bw_olho(cv::Size(60,60), rs_olho.type());
+      cv::threshold(rs_olho, bw_olho, *avg.val, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C);
+      seq_arq++;
 
       // imprime a media (DEBUG)
       //std::cout << *avg.val << std::endl;
-
-      // aplica o threshold
-      cv::threshold(olhos[0], bw_olhos[0], *avg.val, 255, cv::ADAPTIVE_THRESH_GAUSSIAN_C);
-      seq_arq++;
       
-      // mostra imagem final
-      cv::imshow("1", bw_olhos[0]);
+      // mostra imagem final (DEBUG)
+      cv::imshow("1", bw_olho);
 
       // salva imagens para treinamento de direção
       std::string output_file = std::to_string(seq_arq);
       std::cout << "olho_" << output_file << ".png" << std::endl;
-      cv::imwrite("olho_"+output_file+".png", bw_olhos[0]);
+      cv::imwrite(output_dir+"/olho_"+output_file+".png", bw_olho);
     }
 
     // Sai caso tecla ESC seja pressionada
