@@ -8,6 +8,11 @@ make
 ./eyes
 ```
 
+**Executando treinamento**:
+```
+python svm.py
+```
+
 ## Funcionamento
 
 O objetivo final desse programa é de que seja identificado qual direção o olho
@@ -18,9 +23,16 @@ Num primeiro momento, as direções serão: cima, baixo, esquerda e direita.
 Quando uma maior experiência for desenvolvida na calibração do modelo,
 as outras 4 direções referentes às diagonais serão adicionadas.
 
-O **estado atual** do programa está marcado na *TODO list* abaixo. Por enquanto
-os arquivos de imagem que servirão de entrada para a calibração do modelo
-estão sendo salvos.
+O **estado atual** do programa está marcado na *TODO list* abaixo. 
+
+Os arquivos de imagem para treinamento são obtidos através da execução de `eyes` e servem 
+de entrada para a calibração do modelo.
+
+O treinamento é feito utilizando o script python `svm.py`. Atualmente, a taxa de acerto
+é em torno de 87.5%.
+
+O próximo passo é fazer o modelo treinado persistir para ser utilizado numa aplicação
+que detecte o olho pela webcam e estime a direção do olhar.
 
 ## *TODO list*
 
@@ -33,3 +45,4 @@ estão sendo salvos.
 - [x] Treinamento do modelo de predição (aprendizado)
 - [ ] Execução do programa com o modelo calibrado (aprendizado)
 - [ ] Predição satisfatória da direção do olho (aprendizado)
+- [ ] Fazer o mouse se movimentar na direção predita
