@@ -127,7 +127,12 @@ int main(int argc, const char** argv)
       // salva imagens para treinamento de direção
       std::string output_file = std::to_string(seq_arq);
       std::cout << "olho_" << output_file << ".png" << std::endl;
-      if(!cv::imwrite(output_dir+"/olho_"+output_file+".png", bw_olho))
+      
+      // grava figura em preto e branco
+      //if(!cv::imwrite(output_dir+"/olho_"+output_file+".png", bw_olho))
+
+      // grava figura em preto tons de cinza
+      if(!cv::imwrite(output_dir+"/olho_"+output_file+".png", rs_olho))
       {
         std::cout << output_dir+"/olho_"+output_file+".png" << std::endl;
         std::cout << "Erro ao salvar arquivo de imagem" << std::endl;
