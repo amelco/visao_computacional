@@ -39,6 +39,7 @@ int main(int argc, const char** argv)
   int camera_device = 0;
   cv::VideoCapture capture;
   capture.open(camera_device);
+
   if (! capture.isOpened())
   {
     std::cout << "Erro ao capturar video\n";
@@ -56,6 +57,36 @@ int main(int argc, const char** argv)
   // loop principal
   while (capture.read(frame))
   {
+    if (seq_arq == 0)
+    {
+      std::cout << "Olhe para CIMA\nPresione ENTER para continuar...";
+      std::cin.ignore(); std::cin.clear();
+      output_dir = "data/cima";
+    } 
+    if (seq_arq == 60)
+    {
+      std::cout << "Olhe para BAIXO\nPresione ENTER para continuar...";
+      std::cin.ignore();
+      output_dir = "data/baixo";
+    } 
+    if (seq_arq == 120)
+    {
+      std::cout << "Olhe para ESQUERDA\nPresione ENTER para continuar...";
+      std::cin.ignore();
+      output_dir = "data/esq";
+    } 
+    if (seq_arq == 180)
+    {
+      std::cout << "Olhe para DIREITA\nPresione ENTER para continuar...";
+      std::cin.ignore();
+      output_dir = "data/dir";
+    }
+    if (seq_arq == 240)
+    {
+      std::cout << "Imagens necessárias ao treinamento capturadas" << std::endl;
+      break;
+    }
+
     num_frames++;
     time(&start);
 
@@ -96,7 +127,11 @@ int main(int argc, const char** argv)
       // salva imagens para treinamento de direção
       std::string output_file = std::to_string(seq_arq);
       std::cout << "olho_" << output_file << ".png" << std::endl;
-      cv::imwrite(output_dir+"/olho_"+output_file+".png", bw_olho);
+      if(!cv::imwrite(output_dir+"/olho_"+output_file+".png", bw_olho))
+      {
+        std::cout << output_dir+"/olho_"+output_file+".png" << std::endl;
+        std::cout << "Erro ao salvar arquivo de imagem" << std::endl;
+      }
     }
 
     // Sai caso tecla ESC seja pressionada
