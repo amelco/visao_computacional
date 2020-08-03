@@ -46,3 +46,17 @@ que detecte o olho pela webcam e estime a direção do olhar.
 - [ ] Execução do programa com o modelo calibrado (aprendizado)
 - [ ] Predição satisfatória da direção do olho (aprendizado)
 - [ ] Fazer o mouse se movimentar na direção predita
+- [ ] Programa completo em C++
+
+
+**Exemplo de uso do programa completo em C++**:
+
+```
+$ ./eyetrack <condiçao> [arq_modelo] <dt>
+
+  condição: 'cal' para calibrar ou 'use' para utilizar modelo calibrado 'arq_modelo'
+  dt:       intervalo de tempo (em segundos) entre predições
+```
+
+A resposta do programa será uma string contendo a indicação da direção do olhar a cada período X de tempo.
+

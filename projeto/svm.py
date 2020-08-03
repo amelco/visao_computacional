@@ -111,3 +111,9 @@ cm = confusion_matrix(y_val, y_pred)
 print(cm)
 
 print("Score da validação: ", classifier.score(X_val, y_val))
+
+# Salvando modelo
+import joblib as jl
+
+model_file = "svm_eyes.pkl"
+jl.dump(classifier, model_file)
