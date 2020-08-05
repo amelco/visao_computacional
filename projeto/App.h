@@ -20,6 +20,7 @@ public:
   int run();
   void get_app_state();
   void show_usage(std::string);
+  void model_calibrate(Model model);
 
 };
 

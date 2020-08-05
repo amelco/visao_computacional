@@ -1,9 +1,12 @@
 #include "Model.h"
+#include <filesystem>
 
 Model::Model()
 {
   face_cascade_name = "haarcascade_frontalface_alt.xml";
   eyes_cascade_name = "haarcascade_eye_tree_eyeglasses.xml";
+  output_dir = "data/";
+  std::filesystem::create_directory("datasss");
   
   // Carregando os cascades
   if (!face_cascade.load(face_cascade_name))

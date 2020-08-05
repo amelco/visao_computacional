@@ -47,6 +47,7 @@ que detecte o olho pela webcam e estime a direção do olhar.
 - [ ] Predição satisfatória da direção do olho (aprendizado)
 - [ ] Fazer o mouse se movimentar na direção predita
 - [ ] Programa completo em C++
+- [ ] Construir um módulo do NodeJS utilizando N-API
 
 
 **Exemplo de uso do programa completo em C++**:

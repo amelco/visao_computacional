@@ -11,6 +11,8 @@ private:
   cv::CascadeClassifier eyes_cascade;
   std::string face_cascade_name;
   std::string eyes_cascade_name;
+  std::string output_dir;
+
   void detectAndReturnEyes(cv::Mat input, cv::Mat* olho);
 
 public:
